@@ -38,12 +38,12 @@ namespace BethanysPieShop
             // If not creates a cart and adds to the session
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
 
-            // Adds support for sessions
-            services.AddSession();
-
             // Adds access to HTTP context
             services.AddHttpContextAccessor();
             
+            // Adds support for sessions
+            services.AddSession();
+
             
             // Creates an instance every time the application ask for it
             // services.AddTransient() 

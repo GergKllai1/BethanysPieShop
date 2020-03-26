@@ -22,7 +22,7 @@ namespace BethanysPieShop.Models
 
         public static ShoppingCart GetCart(IServiceProvider services)
         {
-            ISession session = services.GetRequiredService<HttpContextAccessor>()?
+            ISession session = services.GetRequiredService<IHttpContextAccessor>()?
                 .HttpContext.Session;
 
             var context = services.GetService<AppDbContext>();
