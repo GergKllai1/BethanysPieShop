@@ -25,5 +25,19 @@ namespace BethanysPieShop.Controllers
 
             return View(pieListViewModel);
         }
+
+        // The name of the parameter has to be the same as defined in the endPoints pattern in 
+        // Startup.cs
+
+        public IActionResult Details(int id)
+        {
+            var pie = _pieRepository.GetPieById(id);
+            if (pie == null)
+            {
+                return NotFound();
+            }
+
+            return View(pie);
+        }
     }
 }
