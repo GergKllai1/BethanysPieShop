@@ -31,8 +31,8 @@ namespace BethanysPieShop
             );
 
             // The instance will be active through the request
-            services.AddScoped<IPieRepository, MockPieRepository>();
-            services.AddScoped<ICategoryRepository, MockCategoryRepository>();
+            services.AddScoped<IPieRepository, PieRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             // Creates an instance every time the application ask for it
             // services.AddTransient() 
             // Create a single instance for the entire application and reuses that instance whenever it is called for
