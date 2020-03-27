@@ -70,6 +70,9 @@ namespace BethanysPieShop
 
             app.UseRouting();
 
+            // Enable Identity framework
+            app.UseAuthentication();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
