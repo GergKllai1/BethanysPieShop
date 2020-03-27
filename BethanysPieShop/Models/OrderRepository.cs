@@ -15,26 +15,31 @@ namespace BethanysPieShop.Models
             _appDbContext = appDbContext;
             _shoppingCart = shoppingCart;
         }
+
         public void CreateOrder(Order order)
         {
             order.OrderPlaced = DateTime.Now;
 
-            _appDbContext.Orders.Add(order);
+            var shoppingCartItems = _shoppingCart.ShoppingCartItems;
+            order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
 
-            var shoppingCartItems = _shoppingCart.GetShoppingCartItems();
+            order.OrderDetails = new List<OrderDetail>();
+            //adding the order with its details
 
             foreach (var shoppingCartItem in shoppingCartItems)
             {
-                var orderDetail = new OrderDetail()
+                var orderDetail = new OrderDetail
                 {
                     Amount = shoppingCartItem.Amount,
                     PieId = shoppingCartItem.Pie.PieId,
-                    OrderId = order.OrderId,
                     Price = shoppingCartItem.Pie.Price
                 };
 
-                _appDbContext.OrderDetails.Add(orderDetail);
+                order.OrderDetails.Add(orderDetail);
             }
+
+            _appDbContext.Orders.Add(order);
+
             _appDbContext.SaveChanges();
         }
     }
