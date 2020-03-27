@@ -33,18 +33,20 @@ namespace BethanysPieShop
             // The instance will be active through the request
             services.AddScoped<IPieRepository, PieRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-            
+
             // GetCart method is invoked upon a request. Checks if the cart is in the session.
             // If not creates a cart and adds to the session
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
 
+            services.AddScoped<IOrderRepository, OrderRepository>();
+
             // Adds access to HTTP context
             services.AddHttpContextAccessor();
-            
+
             // Adds support for sessions
             services.AddSession();
 
-            
+
             // Creates an instance every time the application ask for it
             // services.AddTransient() 
             // Create a single instance for the entire application and reuses that instance whenever it is called for
